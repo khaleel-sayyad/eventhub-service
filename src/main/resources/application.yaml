@@ -1,0 +1,22 @@
+server:
+  port: 8088
+spring:
+  kafka:
+    client-id: first-producer
+    properties:
+      sasl.jaas.config: ${hub-connectionString}
+      sasl.mechanism: PLAIN
+      security.protocol: SASL_SSL
+    consumer:
+      bootstrap-servers: ${broker-list}
+      group-id: group-id
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: ${broker-list}
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+topic:
+  name: ${topic-name}
